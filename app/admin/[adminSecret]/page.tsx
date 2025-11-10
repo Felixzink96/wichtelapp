@@ -277,7 +277,7 @@ export default function AdminDashboard({ params }: { params: Promise<{ adminSecr
                     {event.is_drawn && (
                       <div className="text-right">
                         <p className="text-sm text-gray-600">beschenkt:</p>
-                        <p className="font-semibold text-christmas-green">
+                        <p className="font-semibold text-christmas-green blur-sm select-none" title="Geheim! 🤫">
                           {getReceiverName(participant.id)}
                         </p>
                       </div>
