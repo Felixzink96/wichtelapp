@@ -199,9 +199,16 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Lädt...</div>
-      </main>
+      <>
+        <Snowfall />
+        <main className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-6xl mb-4 animate-bounce">🎅</div>
+            <div className="text-white text-2xl font-bold">Lädt...</div>
+            <div className="text-white/70 text-sm mt-2">Der Weihnachtsmann bereitet alles vor...</div>
+          </div>
+        </main>
+      </>
     )
   }
 
