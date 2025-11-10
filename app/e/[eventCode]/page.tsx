@@ -104,10 +104,8 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       ]
       const randomMessage = messages[Math.floor(Math.random() * messages.length)]
       alert(randomMessage)
-      setTimeout(() => {
-        alert('😂 Nur Spaß Max! Du darfst trotzdem mitmachen... wenn du dich wäschst! 🧼')
-        setEasterEggActive(null)
-      }, 5000)
+      alert('😂 Nur Spaß Max! Du darfst trotzdem mitmachen... wenn du dich wäschst! 🧼')
+      setEasterEggActive(null)
     }
 
     if (name.includes('jürgen') || name.includes('jurgen')) {
@@ -123,10 +121,8 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       ]
       const randomMessage = messages[Math.floor(Math.random() * messages.length)]
       alert(randomMessage)
-      setTimeout(() => {
-        alert('😂 Nur Spaß Papa! Du bist der Beste! ❤️')
-        setEasterEggActive(null)
-      }, 5000)
+      alert('😂 Nur Spaß Papa! Du bist der Beste! ❤️')
+      setEasterEggActive(null)
     }
 
     if (name.includes('joshua') || name.includes('josh')) {
@@ -142,10 +138,8 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       ]
       const randomMessage = messages[Math.floor(Math.random() * messages.length)]
       alert(randomMessage)
-      setTimeout(() => {
-        alert('😂 Nur Spaß Joshua! Chill mal! 🌿')
-        setEasterEggActive(null)
-      }, 5000)
+      alert('😂 Nur Spaß Joshua! Chill mal! 🌿')
+      setEasterEggActive(null)
     }
 
     if (!isValidEmail(formData.email)) {
