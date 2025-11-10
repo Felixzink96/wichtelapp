@@ -29,6 +29,7 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
   const [participants, setParticipants] = useState<Participant[]>([])
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
+  const [easterEggActive, setEasterEggActive] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -88,7 +89,8 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
     // Easter Eggs für die Familie 😂
     const name = formData.name.toLowerCase().trim()
 
-    if (name === 'max') {
+    if (name.includes('max')) {
+      setEasterEggActive('max')
       const messages = [
         '🤢 Max stinkt nach alten Socken!',
         '😷 Puh, Max sollte mal duschen gehen!',
@@ -102,10 +104,12 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       alert(randomMessage)
       setTimeout(() => {
         alert('😂 Nur Spaß Max! Du darfst trotzdem mitmachen... wenn du dich wäschst! 🧼')
-      }, 2000)
+        setEasterEggActive(null)
+      }, 5000)
     }
 
-    if (name === 'jürgen' || name === 'jurgen') {
+    if (name.includes('jürgen') || name.includes('jurgen')) {
+      setEasterEggActive('jurgen')
       const messages = [
         '👴 Jürgen ist schon wieder eingeschlafen!',
         '🧓 Opa Jürgen hat seine Brille verloren... wieder!',
@@ -119,10 +123,12 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       alert(randomMessage)
       setTimeout(() => {
         alert('😂 Nur Spaß Papa! Du bist der Beste! ❤️')
-      }, 2000)
+        setEasterEggActive(null)
+      }, 5000)
     }
 
-    if (name === 'joshua') {
+    if (name.includes('joshua') || name.includes('josh')) {
+      setEasterEggActive('joshua')
       const messages = [
         '🌿 Joshua riecht schon wieder nach Gras!',
         '😵‍💫 Joshua ist komplett stoned!',
@@ -136,7 +142,8 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       alert(randomMessage)
       setTimeout(() => {
         alert('😂 Nur Spaß Joshua! Chill mal! 🌿')
-      }, 2000)
+        setEasterEggActive(null)
+      }, 5000)
     }
 
     if (!isValidEmail(formData.email)) {
@@ -220,7 +227,19 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
   return (
     <>
       <Snowfall />
-      <main className="min-h-screen p-4 py-12">
+      <main
+        className={`min-h-screen p-4 py-12 transition-all duration-1000 ${
+          easterEggActive === 'joshua' ? 'bg-green-500/20 blur-[0.5px] animate-pulse' : ''
+        } ${
+          easterEggActive === 'max' ? 'bg-yellow-600/30 sepia' : ''
+        } ${
+          easterEggActive === 'jurgen' ? 'grayscale' : ''
+        }`}
+        style={{
+          transform: easterEggActive === 'joshua' ? 'rotate(0.5deg)' : 'rotate(0deg)',
+          transition: 'all 1s ease-in-out'
+        }}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
@@ -258,7 +277,7 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Dein Name *
+                      Dein Vorname *
                     </label>
                     <input
                       type="text"
@@ -268,6 +287,9 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
                       placeholder="z.B. Anna"
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-christmas-green focus:ring-0 transition-colors"
                     />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Bitte nur deinen Vornamen eingeben
+                    </p>
                   </div>
 
                   <div>
