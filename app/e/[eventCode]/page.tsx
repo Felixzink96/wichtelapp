@@ -85,8 +85,10 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
-    // Easter Egg für Max 😂
-    if (formData.name.toLowerCase().trim() === 'max') {
+    // Easter Eggs für die Familie 😂
+    const name = formData.name.toLowerCase().trim()
+
+    if (name === 'max') {
       const messages = [
         '🤢 Max stinkt nach alten Socken!',
         '😷 Puh, Max sollte mal duschen gehen!',
@@ -98,9 +100,42 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       ]
       const randomMessage = messages[Math.floor(Math.random() * messages.length)]
       alert(randomMessage)
-      // Warte 2 Sekunden, dann noch eine Nachricht 😈
       setTimeout(() => {
         alert('😂 Nur Spaß Max! Du darfst trotzdem mitmachen... wenn du dich wäschst! 🧼')
+      }, 2000)
+    }
+
+    if (name === 'jürgen' || name === 'jurgen') {
+      const messages = [
+        '👴 Jürgen ist schon wieder eingeschlafen!',
+        '🧓 Opa Jürgen hat seine Brille verloren... wieder!',
+        '😴 Jürgen schnarcht lauter als ein Traktor!',
+        '🦴 Jürgen ist älter als das Internet!',
+        '👨‍🦳 Jürgen vergisst immer wo er das Auto geparkt hat!',
+        '🕰️ Jürgen erzählt zum 100. Mal die gleiche Geschichte!',
+        '📻 Jürgen hört immer noch Kassetten!',
+      ]
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)]
+      alert(randomMessage)
+      setTimeout(() => {
+        alert('😂 Nur Spaß Papa! Du bist der Beste! ❤️')
+      }, 2000)
+    }
+
+    if (name === 'joshua') {
+      const messages = [
+        '🎮 Joshua zockt wieder den ganzen Tag!',
+        '🍕 Joshua isst nur Pizza und Chips!',
+        '😴 Joshua steht erst um 14 Uhr auf!',
+        '🤓 Joshua ist ein Nerd!',
+        '📱 Joshua klebt am Handy wie Sekundenkleber!',
+        '🧟 Joshua ist ein Gaming-Zombie!',
+        '🍔 Joshua kennt jeden McDonald\'s in der Stadt!',
+      ]
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)]
+      alert(randomMessage)
+      setTimeout(() => {
+        alert('😂 Nur Spaß Joshua! Du bist trotzdem cool! 🎮')
       }, 2000)
     }
 
