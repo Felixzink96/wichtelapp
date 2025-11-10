@@ -85,6 +85,25 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
+    // Easter Egg für Max 😂
+    if (formData.name.toLowerCase().trim() === 'max') {
+      const messages = [
+        '🤢 Max stinkt nach alten Socken!',
+        '😷 Puh, Max sollte mal duschen gehen!',
+        '🧀 Max riecht wie alter Käse!',
+        '💩 Max, hast du in Gülle gebadet?',
+        '🦨 Ein Stinktier hat besseren Geruch als Max!',
+        '🧦 Max\' Socken sind eine biologische Waffe!',
+        '🤮 Max ist so stinkig, selbst Fliegen fliehen!',
+      ]
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)]
+      alert(randomMessage)
+      // Warte 2 Sekunden, dann noch eine Nachricht 😈
+      setTimeout(() => {
+        alert('😂 Nur Spaß Max! Du darfst trotzdem mitmachen... wenn du dich wäschst! 🧼')
+      }, 2000)
+    }
+
     if (!isValidEmail(formData.email)) {
       alert('Bitte gib eine gültige Email-Adresse ein.')
       return
