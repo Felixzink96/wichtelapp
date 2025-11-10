@@ -124,18 +124,18 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
 
     if (name === 'joshua') {
       const messages = [
-        '🎮 Joshua zockt wieder den ganzen Tag!',
-        '🍕 Joshua isst nur Pizza und Chips!',
-        '😴 Joshua steht erst um 14 Uhr auf!',
-        '🤓 Joshua ist ein Nerd!',
-        '📱 Joshua klebt am Handy wie Sekundenkleber!',
-        '🧟 Joshua ist ein Gaming-Zombie!',
-        '🍔 Joshua kennt jeden McDonald\'s in der Stadt!',
+        '🌿 Joshua riecht schon wieder nach Gras!',
+        '😵‍💫 Joshua ist komplett stoned!',
+        '🚬 Joshua hat die Bong vergessen zu verstecken!',
+        '🍃 Joshua kauft mehr beim Dealer als im Supermarkt!',
+        '👀 Joshuas Augen sind wieder total rot!',
+        '😎 Joshua ist der Kifferking!',
+        '🌱 Joshua züchtet sein eigenes Gras auf dem Balkon!',
       ]
       const randomMessage = messages[Math.floor(Math.random() * messages.length)]
       alert(randomMessage)
       setTimeout(() => {
-        alert('😂 Nur Spaß Joshua! Du bist trotzdem cool! 🎮')
+        alert('😂 Nur Spaß Joshua! Chill mal! 🌿')
       }, 2000)
     }
 
