@@ -85,7 +85,7 @@ export default function PinInput({ value, onChange, length = 4, disabled = false
       {digits.map((digit, index) => (
         <input
           key={index}
-          ref={(el) => (inputRefs.current[index] = el)}
+          ref={(el) => { inputRefs.current[index] = el }}
           type="text"
           inputMode="numeric"
           maxLength={1}
