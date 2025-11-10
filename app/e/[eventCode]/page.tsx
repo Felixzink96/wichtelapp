@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { formatDate, generateToken, isValidEmail } from '@/lib/utils'
 import Snowfall from '@/components/Snowfall'
 import EmojiPicker from '@/components/EmojiPicker'
+import PinInput from '@/components/PinInput'
 
 interface Event {
   id: string
@@ -35,6 +36,7 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
     email: '',
     wishlist: '',
     avatar_emoji: '🎅',
+    personal_pin: '',
   })
 
   useEffect(() => {
@@ -151,6 +153,11 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
       return
     }
 
+    if (formData.personal_pin.length !== 4) {
+      alert('Bitte gib einen 4-stelligen PIN ein.')
+      return
+    }
+
     setSubmitting(true)
 
     try {
@@ -181,16 +188,17 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
           wishlist: formData.wishlist || null,
           secret_token: secretToken,
           avatar_emoji: formData.avatar_emoji,
+          personal_pin: formData.personal_pin,
         })
         .select()
         .single()
 
       if (error) throw error
 
-      // Show success message with link
+      // Show success message with link and PIN
       const participantLink = `${window.location.origin}/p/${secretToken}`
 
-      alert(`✅ Erfolgreich angemeldet!\n\n⚠️ WICHTIG: Speichere diesen Link!\n\nDein persönlicher Zugang:\n${participantLink}\n\nMit diesem Link kannst du später sehen, wen du gezogen hast!`)
+      alert(`✅ Erfolgreich angemeldet!\n\n⚠️ WICHTIG: Speichere diese Infos!\n\nDein persönlicher Zugang:\n${participantLink}\n\nDein PIN: ${formData.personal_pin}\n\nDu kannst dich auch über die Startseite mit Event-Code + Email + PIN einloggen!`)
 
       // Redirect to participant page
       router.push(`/p/${secretToken}`)
@@ -325,6 +333,19 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
                     selected={formData.avatar_emoji}
                     onSelect={(emoji) => setFormData({ ...formData, avatar_emoji: emoji })}
                   />
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      🔐 Dein persönlicher PIN *
+                    </label>
+                    <PinInput
+                      value={formData.personal_pin}
+                      onChange={(pin) => setFormData({ ...formData, personal_pin: pin })}
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Wähle einen 4-stelligen PIN. Du brauchst ihn zum Einloggen!
+                    </p>
+                  </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">

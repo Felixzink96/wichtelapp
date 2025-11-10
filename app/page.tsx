@@ -35,6 +35,12 @@ export default function Home() {
                 </button>
               </Link>
 
+              <Link href="/login" className="block">
+                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105 shadow-lg">
+                  Teilnehmer Login 🎁
+                </button>
+              </Link>
+
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300"></div>

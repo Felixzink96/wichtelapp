@@ -37,6 +37,7 @@ export default function AdminDashboard({ params }: { params: Promise<{ adminSecr
   const [drawing, setDrawing] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [copiedCode, setCopiedCode] = useState(false)
 
   const eventLink = event ? `${window.location.origin}/e/${event.event_code}` : ''
 
@@ -172,6 +173,14 @@ export default function AdminDashboard({ params }: { params: Promise<{ adminSecr
     setTimeout(() => setCopied(false), 2000)
   }
 
+  function copyCode() {
+    if (event) {
+      navigator.clipboard.writeText(event.event_code)
+      setCopiedCode(true)
+      setTimeout(() => setCopiedCode(false), 2000)
+    }
+  }
+
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center">
@@ -228,26 +237,57 @@ export default function AdminDashboard({ params }: { params: Promise<{ adminSecr
             </div>
           </div>
 
-          {/* Event Link */}
+          {/* Event Code & Link */}
           <div className="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-6 mb-6">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">Event-Link teilen</h2>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={eventLink}
-                readOnly
-                className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50"
-              />
-              <button
-                onClick={copyLink}
-                className="px-6 py-3 bg-christmas-green hover:bg-green-800 text-white font-semibold rounded-xl transition-colors"
-              >
-                {copied ? '✓ Kopiert!' : 'Kopieren'}
-              </button>
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Event teilen</h2>
+
+            {/* Event Code */}
+            <div className="mb-4">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Event-Code (für Teilnehmer-Login)
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={event?.event_code || ''}
+                  readOnly
+                  className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 font-mono text-lg font-bold"
+                />
+                <button
+                  onClick={copyCode}
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
+                >
+                  {copiedCode ? '✓ Kopiert!' : 'Kopieren'}
+                </button>
+              </div>
+              <p className="text-xs text-gray-600 mt-1">
+                Teilnehmer brauchen diesen Code für den Login auf der Startseite
+              </p>
             </div>
-            <p className="text-sm text-gray-600 mt-2">
-              Teile diesen Link mit allen, die mitmachen sollen!
-            </p>
+
+            {/* Event Link */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Event-Link (zur Anmeldung)
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={eventLink}
+                  readOnly
+                  className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50"
+                />
+                <button
+                  onClick={copyLink}
+                  className="px-6 py-3 bg-christmas-green hover:bg-green-800 text-white font-semibold rounded-xl transition-colors"
+                >
+                  {copied ? '✓ Kopiert!' : 'Kopieren'}
+                </button>
+              </div>
+              <p className="text-xs text-gray-600 mt-1">
+                Teile diesen Link mit allen, die sich anmelden sollen
+              </p>
+            </div>
           </div>
 
           {/* Participants */}
