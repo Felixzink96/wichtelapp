@@ -187,6 +187,11 @@ export default function EventJoinPage({ params }: { params: Promise<{ eventCode:
 
       if (error) throw error
 
+      // Show success message with link
+      const participantLink = `${window.location.origin}/p/${secretToken}`
+
+      alert(`✅ Erfolgreich angemeldet!\n\n⚠️ WICHTIG: Speichere diesen Link!\n\nDein persönlicher Zugang:\n${participantLink}\n\nMit diesem Link kannst du später sehen, wen du gezogen hast!`)
+
       // Redirect to participant page
       router.push(`/p/${secretToken}`)
     } catch (error) {
